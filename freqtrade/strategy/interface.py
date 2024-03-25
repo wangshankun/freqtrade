@@ -1441,6 +1441,7 @@ class IStrategy(ABC, HyperStrategyMixin):
         dataframe.loc[:, 'exit_tag'] = ''
         logger.debug(f"Populating exit signals for pair {metadata.get('pair')}.")
         df = self.populate_exit_trend(dataframe, metadata)
+        df.to_html('dataframe_dump.html', index=False)
         if 'exit_long' not in df.columns:
             df = df.rename({'sell': 'exit_long'}, axis='columns')
         return df
